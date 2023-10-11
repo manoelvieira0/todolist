@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data // Lombok para Getters e Setters
 @Entity(name = "tb_tasks") // Tabela
-public class taskModel {
+public class TaskModel {
 
   @Id
   @GeneratedValue(generator = "UUID")
