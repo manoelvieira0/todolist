@@ -26,8 +26,17 @@ public class TaskController {
     taskModel.setIdUser((UUID) idUser); // Setando user ID
 
     var currentDate = LocalDateTime.now();
-    if (currentDate.isAfter(taskModel.getStartAt()) || currentDate.isAfter(taskModel.getEndAt())) { // Para verificar se a tarefa tem a data inferior que a atual
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("A data de ínicio / data de término deve ser maior que a data atual.");
+    if (currentDate.isAfter(taskModel.getStartAt()) || currentDate.isAfter(taskModel.getEndAt())) { // Para verificar se
+                                                                                                    // a tarefa tem a
+                                                                                                    // data inferior que
+                                                                                                    // a atual
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body("A data de ínicio / data de término deve ser maior que a data atual.");
+    }
+
+    if (taskModel.getStartAt().isAfter(taskModel.getEndAt())) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body("A data de ínicio deve ser menor que a data de término.");
     }
 
     var task = this.taskRepository.save(taskModel);
